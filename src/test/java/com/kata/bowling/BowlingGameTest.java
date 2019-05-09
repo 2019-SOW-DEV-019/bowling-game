@@ -117,6 +117,16 @@ public class BowlingGameTest {
         assertEquals(285,game.score());
     }
 
+    @Test
+    public void shouldReturn282When10StrikeFollowedByTwoBonusRollsAs4() {
+        buildRolls("X", 10);
+        rolls.add("4");
+        rolls.add("4");
+        game.prepareFrames(rolls);
+
+        assertEquals(282,game.score());
+    }
+
     private void strike() {
         rolls.add("X");
     }
