@@ -24,8 +24,7 @@ public class BowlingGame {
     }
 
     private int strikeBonus(int frameCounter) {
-        return frames.get(frameCounter + 1).getRoll1()
-                + frames.get(frameCounter + 2).getRoll1();
+        return frames.get(frameCounter + 1).frameScore();
     }
 
     private boolean isStrike(int frameCounter) {
@@ -41,7 +40,8 @@ public class BowlingGame {
     }
 
     private boolean isSpare(int frameCounter) {
-        return frames.get(frameCounter).frameScore() == 10;
+        return frames.get(frameCounter).getRoll1() != 10 &&
+                frames.get(frameCounter).frameScore() == 10;
     }
 
     public void prepareFrames(List<String> rolls) {

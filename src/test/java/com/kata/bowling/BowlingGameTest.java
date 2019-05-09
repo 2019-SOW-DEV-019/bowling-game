@@ -68,6 +68,18 @@ public class BowlingGameTest {
         assertEquals(18, game.score());
     }
 
+    @Test
+    public void shouldReturn34whenStrikeFollowedBySpare() {
+        rolls.add("X");
+        rolls.add("5");
+        rolls.add("/");
+        rolls.add("2");
+        buildRolls("0", 15);
+        game.prepareFrames(rolls);
+
+        assertEquals(34, game.score());
+    }
+
     private void buildRolls(String noOfPinsDown, int noOfRollsToAdd) {
         for (int rollCount = 0; rollCount < noOfRollsToAdd; rollCount++) {
             rolls.add(noOfPinsDown);
