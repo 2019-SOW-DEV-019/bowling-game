@@ -33,4 +33,13 @@ public class FrameTest {
         assertTrue(frame.isBonusFrame());
     }
 
+    @Test
+    public void shouldReturnRoll1AndRoll2OfAFrame() {
+        frame.setRoll1(5);
+        frame.setRoll2(4);
+
+        assertEquals(5,(int) frame.getRoll1());
+        assertEquals(4,(int) frame.getRoll2());
+    }
+
 }

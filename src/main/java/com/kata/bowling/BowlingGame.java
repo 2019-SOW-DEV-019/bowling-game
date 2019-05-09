@@ -13,15 +13,23 @@ public class BowlingGame {
         int score = 0;
         for (int frameCounter = 0; frameCounter < 10; frameCounter++) {
             score += frameScore(frameCounter);
-            if(frames.get(frameCounter).getRoll1() == 10){
-                score += frames.get(frameCounter + 1).getRoll1()
-                        + frames.get(frameCounter + 2).getRoll1();
+            if(isStrike(frameCounter)){
+                score += strikeBonus(frameCounter);
             }
             if(isSpare(frameCounter)) {
                 score += spareBonus(frameCounter);
             }
         }
         return score;
+    }
+
+    private int strikeBonus(int frameCounter) {
+        return frames.get(frameCounter + 1).getRoll1()
+                + frames.get(frameCounter + 2).getRoll1();
+    }
+
+    private boolean isStrike(int frameCounter) {
+        return frames.get(frameCounter).getRoll1() == 10;
     }
 
     private Integer frameScore(int frameCounter) {
@@ -53,12 +61,16 @@ public class BowlingGame {
                     frame.setRoll2(10 - frame.getRoll1());
                 }
             } else{
-                frame.setRoll1(10);
-                frame.setRoll2(0);
+                buildStrikeFrame(frame);
                 rollCounter--;
             }
             frames.add(frame);
         }
+    }
+
+    private void buildStrikeFrame(Frame frame) {
+        frame.setRoll1(10);
+        frame.setRoll2(0);
     }
 
     private void addBonusFrame(List<String> rolls, int rollCounter) {
