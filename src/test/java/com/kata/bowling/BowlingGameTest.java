@@ -37,8 +37,7 @@ public class BowlingGameTest {
 
     @Test
     public void shouldReturn14WhenSpareFollowedBy2PinsDown() {
-        rolls.add("7");
-        rolls.add("/");
+        spare();
         rolls.add("2");
         buildRolls("0", 17);
         game.prepareFrames(rolls);
@@ -49,8 +48,7 @@ public class BowlingGameTest {
     @Test
     public void shouldReturn14WhenLastFrameIsSpareAnd4PinsDownInBonusRoll() {
         buildRolls("0", 18);
-        rolls.add("5");
-        rolls.add("/");
+        spare();
         rolls.add("4");
         game.prepareFrames(rolls);
 
@@ -59,7 +57,7 @@ public class BowlingGameTest {
 
     @Test
     public void shouldReturn18ForAStrikeFollowedByTwoRollsAs2() {
-        rolls.add("X");
+        strike();
         rolls.add("2");
         rolls.add("2");
         buildRolls("0", 16);
@@ -70,9 +68,8 @@ public class BowlingGameTest {
 
     @Test
     public void shouldReturn34whenStrikeFollowedBySpare() {
-        rolls.add("X");
-        rolls.add("5");
-        rolls.add("/");
+        strike();
+        spare();
         rolls.add("2");
         buildRolls("0", 15);
         game.prepareFrames(rolls);
@@ -80,9 +77,19 @@ public class BowlingGameTest {
         assertEquals(34, game.score());
     }
 
+    private void strike() {
+        rolls.add("X");
+    }
+
+    private void spare() {
+        rolls.add("5");
+        rolls.add("/");
+    }
+
     private void buildRolls(String noOfPinsDown, int noOfRollsToAdd) {
         for (int rollCount = 0; rollCount < noOfRollsToAdd; rollCount++) {
             rolls.add(noOfPinsDown);
         }
     }
+
 }

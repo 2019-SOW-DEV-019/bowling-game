@@ -23,7 +23,7 @@ public class BowlingGame {
         return score;
     }
 
-    private int strikeBonus(int frameCounter) {
+    private Integer strikeBonus(int frameCounter) {
         return frames.get(frameCounter + 1).frameScore();
     }
 
@@ -54,17 +54,21 @@ public class BowlingGame {
                 break;
             }
             if(isNumeric(rolls.get(rollCounter))){
-                frame.setRoll1(Integer.valueOf(rolls.get(rollCounter)));
-                if (isNumeric(rolls.get(rollCounter + 1))) {
-                    frame.setRoll2(Integer.valueOf(rolls.get(rollCounter + 1)));
-                } else {
-                    frame.setRoll2(10 - frame.getRoll1());
-                }
+                buildFrameWhenRollIsNotAStrike(rolls, frame, rollCounter);
             } else{
                 buildStrikeFrame(frame);
                 rollCounter--;
             }
             frames.add(frame);
+        }
+    }
+
+    private void buildFrameWhenRollIsNotAStrike(List<String> rolls, Frame frame, int rollCounter) {
+        frame.setRoll1(Integer.valueOf(rolls.get(rollCounter)));
+        if (isNumeric(rolls.get(rollCounter + 1))) {
+            frame.setRoll2(Integer.valueOf(rolls.get(rollCounter + 1)));
+        } else {
+            frame.setRoll2(10 - frame.getRoll1());
         }
     }
 
