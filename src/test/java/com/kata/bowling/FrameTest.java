@@ -11,7 +11,7 @@ public class FrameTest {
     Frame frame;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         frame = new Frame();
     }
 

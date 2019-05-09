@@ -3,6 +3,7 @@ package com.kata.bowling;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.kata.bowling.BowlingGameConstants.*;
 import static com.kata.bowling.BowlingGameUtil.isNumeric;
 
 public class BowlingGame {
@@ -10,8 +11,8 @@ public class BowlingGame {
     private List<Frame> frames;
 
     public int score() {
-        int score = 0;
-        for (int frameCounter = 0; frameCounter < 10; frameCounter++) {
+        int score = ZERO;
+        for (int frameCounter = ZERO; frameCounter < MAX_SIZE_OF_FRAME; frameCounter++) {
             score += frameScore(frameCounter);
             if(isStrike(frameCounter)){
                 score += strikeBonus(frameCounter);
@@ -24,17 +25,17 @@ public class BowlingGame {
     }
 
     private Integer strikeBonus(int frameCounter) {
-        if(isStrike(frameCounter + 1) &&
-                !frames.get(frameCounter + 1).isBonusFrame()){
-            return frames.get(frameCounter + 1).getRoll1()
-                    + frames.get(frameCounter + 2).getRoll1();
+        if(isStrike(frameCounter + ONE) &&
+                !frames.get(frameCounter + ONE).isBonusFrame()){
+            return frames.get(frameCounter + ONE).getRoll1()
+                    + frames.get(frameCounter + TWO).getRoll1();
         }else{
-            return frames.get(frameCounter + 1).frameScore();
+            return frames.get(frameCounter + ONE).frameScore();
         }
     }
 
     private boolean isStrike(int frameCounter) {
-        return frames.get(frameCounter).getRoll1() == 10;
+        return frames.get(frameCounter).getRoll1() == TEN_PIN_DOWN;
     }
 
     private Integer frameScore(int frameCounter) {
@@ -42,20 +43,20 @@ public class BowlingGame {
     }
 
     private Integer spareBonus(int frameCounter) {
-        return frames.get(frameCounter + 1).getRoll1();
+        return frames.get(frameCounter + ONE).getRoll1();
     }
 
     private boolean isSpare(int frameCounter) {
-        return frames.get(frameCounter).getRoll1() != 10 &&
-                frames.get(frameCounter).frameScore() == 10;
+        return frames.get(frameCounter).getRoll1() != TEN_PIN_DOWN &&
+                frames.get(frameCounter).frameScore() == TEN_PIN_DOWN;
     }
 
     public void prepareFrames(List<String> rolls) {
         frames = new ArrayList<>();
         Frame frame;
-        for (int rollCounter = 0; rollCounter < rolls.size(); rollCounter = rollCounter + 2) {
+        for (int rollCounter = ZERO; rollCounter < rolls.size(); rollCounter = rollCounter + TWO) {
             frame = new Frame();
-            if (frames.size() >= 10) {
+            if (frames.size() >= MAX_SIZE_OF_FRAME) {
                 addBonusFrame(rolls, rollCounter);
                 break;
             }
@@ -72,16 +73,16 @@ public class BowlingGame {
 
     private void buildFrameWhenRollIsNotAStrike(List<String> rolls, Frame frame, int rollCounter) {
         frame.setRoll1(Integer.valueOf(rolls.get(rollCounter)));
-        if (isNumeric(rolls.get(rollCounter + 1))) {
-            frame.setRoll2(Integer.valueOf(rolls.get(rollCounter + 1)));
+        if (isNumeric(rolls.get(rollCounter + ONE))) {
+            frame.setRoll2(Integer.valueOf(rolls.get(rollCounter + ONE)));
         } else {
             buildRoll2ValueWhenIsSpare(frame);
         }
     }
 
     private void buildStrikeFrame(Frame frame) {
-        frame.setRoll1(10);
-        frame.setRoll2(0);
+        frame.setRoll1(TEN_PIN_DOWN);
+        frame.setRoll2(ZERO_PIN_DOWN);
     }
 
     private void addBonusFrame(List<String> rolls, int rollCounter) {
@@ -90,22 +91,22 @@ public class BowlingGame {
         if (isNumeric(rolls.get(rollCounter))) {
             bonusFrame.setRoll1(Integer.valueOf(rolls.get(rollCounter)));
         } else {
-            bonusFrame.setRoll1(10);
+            bonusFrame.setRoll1(TEN_PIN_DOWN);
         }
-        if("X".equalsIgnoreCase(rolls.get(rollCounter-1))){
-            if (isNumeric(rolls.get(rollCounter+1))) {
-                bonusFrame.setRoll2(Integer.valueOf(rolls.get(rollCounter+1)));
-            } else if("/".equalsIgnoreCase(rolls.get(rollCounter+1))) {
+        if(STRIKE.equalsIgnoreCase(rolls.get(rollCounter - ONE))){
+            if (isNumeric(rolls.get(rollCounter + ONE))) {
+                bonusFrame.setRoll2(Integer.valueOf(rolls.get(rollCounter + ONE)));
+            } else if(SPARE.equalsIgnoreCase(rolls.get(rollCounter + ONE))) {
                 buildRoll2ValueWhenIsSpare(bonusFrame);
             } else {
-                bonusFrame.setRoll2(10);
+                bonusFrame.setRoll2(TEN_PIN_DOWN);
             }
         }
         frames.add(bonusFrame);
     }
 
     private void buildRoll2ValueWhenIsSpare(Frame frame) {
-        frame.setRoll2(10 - frame.getRoll1());
+        frame.setRoll2(MAX_PIN_IN_A_FRAME - frame.getRoll1());
     }
 
 }
