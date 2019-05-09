@@ -3,19 +3,33 @@ package com.kata.bowling;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.kata.bowling.BowlingGameUtil.isNumeric;
+
 public class BowlingGame {
 
     List<Frame> frames;
 
-    public int score(List<String> rolls) {
+    public int score() {
         int score = 0;
         for (int frameCounter = 0; frameCounter < frames.size(); frameCounter++) {
-            if(frames.get(frameCounter).frameScore() == 10) {
-                score += frames.get(frameCounter + 1).getRoll1();
+            if(isSpare(frameCounter)) {
+                score += spareBonus(frameCounter);
             }
-            score += frames.get(frameCounter).frameScore();
+            score += frameScore(frameCounter);
         }
         return score;
+    }
+
+    private Integer frameScore(int frameCounter) {
+        return frames.get(frameCounter).frameScore();
+    }
+
+    private Integer spareBonus(int frameCounter) {
+        return frames.get(frameCounter + 1).getRoll1();
+    }
+
+    private boolean isSpare(int frameCounter) {
+        return frames.get(frameCounter).frameScore() == 10;
     }
 
     public void prepareFrames(List<String> rolls) {
@@ -33,7 +47,4 @@ public class BowlingGame {
         }
     }
 
-    private boolean isNumeric(String str) {
-        return str.matches("-?\\d+(\\.\\d+)?");
-    }
 }

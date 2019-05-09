@@ -24,7 +24,7 @@ public class BowlingGameTest {
         buildRolls("0", 20);
         game.prepareFrames(rolls);
 
-        assertEquals(0, game.score(rolls));
+        assertEquals(0, game.score());
     }
 
     @Test
@@ -32,7 +32,7 @@ public class BowlingGameTest {
         buildRolls("1", 20);
         game.prepareFrames(rolls);
 
-        assertEquals(20, game.score(rolls));
+        assertEquals(20, game.score());
     }
 
     @Test
@@ -41,9 +41,9 @@ public class BowlingGameTest {
         rolls.add("/");
         rolls.add("2");
         buildRolls("0", 17);
-
         game.prepareFrames(rolls);
-        assertEquals(14, game.score(rolls));
+
+        assertEquals(14, game.score());
     }
 
     private void buildRolls(String noOfPinsDown, int noOfRollsToAdd) {
