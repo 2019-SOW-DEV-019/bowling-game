@@ -11,7 +11,7 @@ public class BowlingGame {
 
     public int score() {
         int score = 0;
-        for (int frameCounter = 0; frameCounter < frames.size(); frameCounter++) {
+        for (int frameCounter = 0; frameCounter < 10; frameCounter++) {
             if(isSpare(frameCounter)) {
                 score += spareBonus(frameCounter);
             }
@@ -37,6 +37,17 @@ public class BowlingGame {
         Frame frame;
         for (int rollCounter = 0; rollCounter < rolls.size(); rollCounter = rollCounter + 2) {
             frame = new Frame();
+            if (frames.size() >= 10) {
+                Frame bonusFrame = new Frame();
+                bonusFrame.setBonus(true);
+                if (isNumeric(rolls.get(rollCounter))) {
+                    bonusFrame.setRoll1(Integer.valueOf(rolls.get(rollCounter)));
+                }else{
+                    bonusFrame.setRoll1(10);
+                }
+                frames.add(bonusFrame);
+                break;
+            }
             frame.setRoll1(Integer.valueOf(rolls.get(rollCounter)));
             if (isNumeric(rolls.get(rollCounter + 1))) {
                 frame.setRoll2(Integer.valueOf(rolls.get(rollCounter + 1)));

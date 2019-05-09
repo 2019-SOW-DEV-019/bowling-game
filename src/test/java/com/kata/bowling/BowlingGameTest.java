@@ -46,6 +46,17 @@ public class BowlingGameTest {
         assertEquals(14, game.score());
     }
 
+    @Test
+    public void shouldReturn14WhenLastFrameIsSpareAnd4PinsDownInBonusRoll() {
+        buildRolls("0", 18);
+        rolls.add("5");
+        rolls.add("/");
+        rolls.add("4");
+        game.prepareFrames(rolls);
+
+        assertEquals(14, game.score());
+    }
+
     private void buildRolls(String noOfPinsDown, int noOfRollsToAdd) {
         for (int rollCount = 0; rollCount < noOfRollsToAdd; rollCount++) {
             rolls.add(noOfPinsDown);

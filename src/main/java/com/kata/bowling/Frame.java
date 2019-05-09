@@ -24,4 +24,12 @@ public class Frame {
     public Integer frameScore() {
         return roll1 + roll2;
     }
+
+    public void setBonus(boolean bonusFrame) {
+        this.bonusFrame = bonusFrame;
+    }
+
+    public Boolean isBonusFrame() {
+        return bonusFrame;
+    }
 }
