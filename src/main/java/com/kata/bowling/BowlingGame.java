@@ -95,6 +95,8 @@ public class BowlingGame {
         if("X".equalsIgnoreCase(rolls.get(rollCounter-1))){
             if (isNumeric(rolls.get(rollCounter+1))) {
                 bonusFrame.setRoll2(Integer.valueOf(rolls.get(rollCounter+1)));
+            } else if("/".equalsIgnoreCase(rolls.get(rollCounter+1))) {
+                bonusFrame.setRoll2(10-bonusFrame.getRoll1());
             } else {
                 bonusFrame.setRoll2(10);
             }

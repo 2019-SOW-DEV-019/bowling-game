@@ -108,6 +108,15 @@ public class BowlingGameTest {
         assertEquals(300, game.score());
     }
 
+    @Test
+    public void shouldReturn285When10StrikeFollowedBySpare() {
+        buildRolls("X", 10);
+        spare();
+        game.prepareFrames(rolls);
+
+        assertEquals(285,game.score());
+    }
+
     private void strike() {
         rolls.add("X");
     }
