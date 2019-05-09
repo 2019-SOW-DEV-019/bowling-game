@@ -38,14 +38,7 @@ public class BowlingGame {
         for (int rollCounter = 0; rollCounter < rolls.size(); rollCounter = rollCounter + 2) {
             frame = new Frame();
             if (frames.size() >= 10) {
-                Frame bonusFrame = new Frame();
-                bonusFrame.setBonus(true);
-                if (isNumeric(rolls.get(rollCounter))) {
-                    bonusFrame.setRoll1(Integer.valueOf(rolls.get(rollCounter)));
-                }else{
-                    bonusFrame.setRoll1(10);
-                }
-                frames.add(bonusFrame);
+                addBonusFrame(rolls, rollCounter);
                 break;
             }
             frame.setRoll1(Integer.valueOf(rolls.get(rollCounter)));
@@ -56,6 +49,17 @@ public class BowlingGame {
             }
             frames.add(frame);
         }
+    }
+
+    private void addBonusFrame(List<String> rolls, int rollCounter) {
+        Frame bonusFrame = new Frame();
+        bonusFrame.setBonus(true);
+        if (isNumeric(rolls.get(rollCounter))) {
+            bonusFrame.setRoll1(Integer.valueOf(rolls.get(rollCounter)));
+        }else{
+            bonusFrame.setRoll1(10);
+        }
+        frames.add(bonusFrame);
     }
 
 }
