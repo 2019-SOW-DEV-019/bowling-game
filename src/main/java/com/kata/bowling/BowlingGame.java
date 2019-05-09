@@ -75,7 +75,7 @@ public class BowlingGame {
         if (isNumeric(rolls.get(rollCounter + 1))) {
             frame.setRoll2(Integer.valueOf(rolls.get(rollCounter + 1)));
         } else {
-            frame.setRoll2(10 - frame.getRoll1());
+            buildRoll2ValueWhenIsSpare(frame);
         }
     }
 
@@ -96,12 +96,16 @@ public class BowlingGame {
             if (isNumeric(rolls.get(rollCounter+1))) {
                 bonusFrame.setRoll2(Integer.valueOf(rolls.get(rollCounter+1)));
             } else if("/".equalsIgnoreCase(rolls.get(rollCounter+1))) {
-                bonusFrame.setRoll2(10-bonusFrame.getRoll1());
+                buildRoll2ValueWhenIsSpare(bonusFrame);
             } else {
                 bonusFrame.setRoll2(10);
             }
         }
         frames.add(bonusFrame);
+    }
+
+    private void buildRoll2ValueWhenIsSpare(Frame frame) {
+        frame.setRoll2(10 - frame.getRoll1());
     }
 
 }
