@@ -12,10 +12,14 @@ public class BowlingGame {
     public int score() {
         int score = 0;
         for (int frameCounter = 0; frameCounter < 10; frameCounter++) {
+            score += frameScore(frameCounter);
+            if(frames.get(frameCounter).getRoll1() == 10){
+                score += frames.get(frameCounter + 1).getRoll1()
+                        + frames.get(frameCounter + 2).getRoll1();
+            }
             if(isSpare(frameCounter)) {
                 score += spareBonus(frameCounter);
             }
-            score += frameScore(frameCounter);
         }
         return score;
     }
@@ -41,11 +45,17 @@ public class BowlingGame {
                 addBonusFrame(rolls, rollCounter);
                 break;
             }
-            frame.setRoll1(Integer.valueOf(rolls.get(rollCounter)));
-            if (isNumeric(rolls.get(rollCounter + 1))) {
-                frame.setRoll2(Integer.valueOf(rolls.get(rollCounter + 1)));
-            } else {
-                frame.setRoll2(10 - frame.getRoll1());
+            if(isNumeric(rolls.get(rollCounter))){
+                frame.setRoll1(Integer.valueOf(rolls.get(rollCounter)));
+                if (isNumeric(rolls.get(rollCounter + 1))) {
+                    frame.setRoll2(Integer.valueOf(rolls.get(rollCounter + 1)));
+                } else {
+                    frame.setRoll2(10 - frame.getRoll1());
+                }
+            } else{
+                frame.setRoll1(10);
+                frame.setRoll2(0);
+                rollCounter--;
             }
             frames.add(frame);
         }

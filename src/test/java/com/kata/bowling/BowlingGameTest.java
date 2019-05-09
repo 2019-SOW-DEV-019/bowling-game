@@ -57,6 +57,17 @@ public class BowlingGameTest {
         assertEquals(14, game.score());
     }
 
+    @Test
+    public void shouldReturn18ForAStrikeFollowedByTwoRollsAs2() {
+        rolls.add("X");
+        rolls.add("2");
+        rolls.add("2");
+        buildRolls("0", 16);
+        game.prepareFrames(rolls);
+
+        assertEquals(18, game.score());
+    }
+
     private void buildRolls(String noOfPinsDown, int noOfRollsToAdd) {
         for (int rollCount = 0; rollCount < noOfRollsToAdd; rollCount++) {
             rolls.add(noOfPinsDown);
