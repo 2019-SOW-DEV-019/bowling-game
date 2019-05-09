@@ -100,6 +100,14 @@ public class BowlingGameTest {
         assertEquals(40, game.score());
     }
 
+    @Test
+    public void shouldReturn300WhenAllAreStrike() {
+        buildRolls("X", 12);
+        game.prepareFrames(rolls);
+
+        assertEquals(300, game.score());
+    }
+
     private void strike() {
         rolls.add("X");
     }

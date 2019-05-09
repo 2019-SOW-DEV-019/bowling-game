@@ -24,7 +24,8 @@ public class BowlingGame {
     }
 
     private Integer strikeBonus(int frameCounter) {
-        if(isStrike(frameCounter + 1)){
+        if(isStrike(frameCounter + 1) &&
+                !frames.get(frameCounter + 1).isBonusFrame()){
             return frames.get(frameCounter + 1).getRoll1()
                     + frames.get(frameCounter + 2).getRoll1();
         }else{
@@ -64,6 +65,7 @@ public class BowlingGame {
                 buildStrikeFrame(frame);
                 rollCounter--;
             }
+            frame.setBonus(false);
             frames.add(frame);
         }
     }
@@ -87,8 +89,15 @@ public class BowlingGame {
         bonusFrame.setBonus(true);
         if (isNumeric(rolls.get(rollCounter))) {
             bonusFrame.setRoll1(Integer.valueOf(rolls.get(rollCounter)));
-        }else{
+        } else {
             bonusFrame.setRoll1(10);
+        }
+        if("X".equalsIgnoreCase(rolls.get(rollCounter-1))){
+            if (isNumeric(rolls.get(rollCounter+1))) {
+                bonusFrame.setRoll2(Integer.valueOf(rolls.get(rollCounter+1)));
+            } else {
+                bonusFrame.setRoll2(10);
+            }
         }
         frames.add(bonusFrame);
     }
