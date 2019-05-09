@@ -10,8 +10,8 @@ import static org.junit.Assert.assertEquals;
 
 public class BowlingGameTest {
 
-    BowlingGame game;
-    List<String> rolls;
+    private BowlingGame game;
+    private List<String> rolls;
 
     @Before
     public void setUp() throws Exception {

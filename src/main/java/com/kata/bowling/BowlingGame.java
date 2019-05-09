@@ -7,7 +7,7 @@ import static com.kata.bowling.BowlingGameUtil.isNumeric;
 
 public class BowlingGame {
 
-    List<Frame> frames;
+    private List<Frame> frames;
 
     public int score() {
         int score = 0;
