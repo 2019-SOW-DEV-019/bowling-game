@@ -21,10 +21,20 @@ Upon receiving a valid sequence of rolls [American Ten-Pin Bowling], this class 
 <LI>5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5 (21 rolls: 10 pairs of 5 and spare, with a final 5) = 10 frames * 15 points = 150</LI>
 </UL>
 
-<H6>Disclaimer:</H6>
+<H6>Assumptions:</H6>
 
 <UL>
 <LI>We will not check for valid rolls.</LI>
 <LI>We will not check for correct number of rolls and frames.</LI>
 <LI>We will not provide scores for intermediate frames.</LI>
+</UL>
+
+
+<H3>Steps to compile the project</H3>
+
+<UL>
+<LI>Check out the project from GIT.</LI>
+<LI>Do Maven Clean Install the project.</LI>
+<LI>Run the main class GameRunner.java</LI>
+<LI>Enter the rolls to calculate the BowlingGame Score.</LI>
 </UL>
