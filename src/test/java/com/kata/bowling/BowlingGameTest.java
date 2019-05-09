@@ -89,6 +89,17 @@ public class BowlingGameTest {
         assertEquals(38, game.score());
     }
 
+    @Test
+    public void shouldReturn40WhenStrikeFollowedByStrike() {
+        strike();
+        strike();
+        buildRolls("2", 2);
+        buildRolls("0", 14);
+        game.prepareFrames(rolls);
+
+        assertEquals(40, game.score());
+    }
+
     private void strike() {
         rolls.add("X");
     }

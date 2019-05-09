@@ -24,7 +24,12 @@ public class BowlingGame {
     }
 
     private Integer strikeBonus(int frameCounter) {
-        return frames.get(frameCounter + 1).frameScore();
+        if(isStrike(frameCounter + 1)){
+            return frames.get(frameCounter + 1).getRoll1()
+                    + frames.get(frameCounter + 2).getRoll1();
+        }else{
+            return frames.get(frameCounter + 1).frameScore();
+        }
     }
 
     private boolean isStrike(int frameCounter) {
