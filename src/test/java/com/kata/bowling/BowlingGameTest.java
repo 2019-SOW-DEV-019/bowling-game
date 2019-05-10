@@ -128,6 +128,16 @@ public class BowlingGameTest {
         assertEquals(282, game.score());
     }
 
+    @Test
+    public void shouldReturn270When10StrikeFollowedByTwoBonusRollsAs0() {
+        buildRolls("X", 10);
+        rolls.add(ZERO_PIN_KNOCK);
+        rolls.add(ZERO_PIN_KNOCK);
+        game.prepareFrames(rolls);
+
+        assertEquals(270, game.score());
+    }
+
     private void strike() {
         rolls.add(STRIKE);
     }

@@ -94,7 +94,7 @@ public class BowlingGame {
             bonusFrame.setRoll1(TEN_PIN_DOWN);
         }
         if(STRIKE.equalsIgnoreCase(rolls.get(rollCounter - ONE))){
-            if (isNumeric(rolls.get(rollCounter + ONE))) {
+            if (isNumeric(rolls.get(rollCounter + ONE))|| ZERO_PIN_KNOCK.equalsIgnoreCase(rolls.get(rollCounter))) {
                 assignRoll2ValueWhenItIsNotASpare(rolls, rollCounter, bonusFrame);
             } else if(SPARE.equalsIgnoreCase(rolls.get(rollCounter + ONE))) {
                 buildRoll2ValueWhenIsSpare(bonusFrame);
