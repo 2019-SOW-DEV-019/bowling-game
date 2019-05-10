@@ -60,7 +60,7 @@ public class BowlingGame {
                 addBonusFrame(rolls, rollCounter);
                 break;
             }
-            if(isNumeric(rolls.get(rollCounter))){
+            if(isNumeric(rolls.get(rollCounter)) || "-".equalsIgnoreCase(rolls.get(rollCounter))){
                 buildFrameWhenRollIsNotAStrike(rolls, frame, rollCounter);
             } else{
                 buildStrikeFrame(frame);
@@ -72,9 +72,17 @@ public class BowlingGame {
     }
 
     private void buildFrameWhenRollIsNotAStrike(List<String> rolls, Frame frame, int rollCounter) {
-        frame.setRoll1(Integer.valueOf(rolls.get(rollCounter)));
-        if (isNumeric(rolls.get(rollCounter + ONE))) {
-            frame.setRoll2(Integer.valueOf(rolls.get(rollCounter + ONE)));
+        if (isNumeric(rolls.get(rollCounter))) {
+            frame.setRoll1(Integer.valueOf(rolls.get(rollCounter)));
+        } else {
+            frame.setRoll1(ZERO_PIN_DOWN);
+        }
+        if (isNumeric(rolls.get(rollCounter + ONE)) || "-".equalsIgnoreCase(rolls.get(rollCounter + ONE))) {
+            if (isNumeric(rolls.get(rollCounter + ONE))) {
+                frame.setRoll2(Integer.valueOf(rolls.get(rollCounter + ONE)));
+            } else {
+                frame.setRoll2(ZERO_PIN_DOWN);
+            }
         } else {
             buildRoll2ValueWhenIsSpare(frame);
         }
@@ -88,14 +96,22 @@ public class BowlingGame {
     private void addBonusFrame(List<String> rolls, int rollCounter) {
         Frame bonusFrame = new Frame();
         bonusFrame.setBonus(true);
-        if (isNumeric(rolls.get(rollCounter))) {
-            bonusFrame.setRoll1(Integer.valueOf(rolls.get(rollCounter)));
+        if (isNumeric(rolls.get(rollCounter))  || "-".equalsIgnoreCase(rolls.get(rollCounter))) {
+            if (isNumeric(rolls.get(rollCounter))) {
+                bonusFrame.setRoll1(Integer.valueOf(rolls.get(rollCounter)));
+            } else {
+                bonusFrame.setRoll1(ZERO_PIN_DOWN);
+            }
         } else {
             bonusFrame.setRoll1(TEN_PIN_DOWN);
         }
         if(STRIKE.equalsIgnoreCase(rolls.get(rollCounter - ONE))){
             if (isNumeric(rolls.get(rollCounter + ONE))) {
-                bonusFrame.setRoll2(Integer.valueOf(rolls.get(rollCounter + ONE)));
+                if (isNumeric(rolls.get(rollCounter + ONE))) {
+                    bonusFrame.setRoll2(Integer.valueOf(rolls.get(rollCounter + ONE)));
+                } else {
+                    bonusFrame.setRoll2(ZERO_PIN_DOWN);
+                }
             } else if(SPARE.equalsIgnoreCase(rolls.get(rollCounter + ONE))) {
                 buildRoll2ValueWhenIsSpare(bonusFrame);
             } else {
