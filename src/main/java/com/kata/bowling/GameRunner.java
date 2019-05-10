@@ -8,7 +8,9 @@ public class GameRunner {
 
     public static void main(String[] args) {
 
-        System.out.println("If frame is a strike, give input as 'x'\nIf frame is a spare, give input as '5/' or '3/'\n\nEg: 'XXXXXXXX5472'");
+        System.out.println("If frame is a strike, give input as 'x'\n" +
+                "If frame is a spare, give input as '5/' or '3/'\n" +
+                "If roll is miss, give input as '-5' or '8-'\nEg: 'XXXXXXXX5472'");
         System.out.println("Enter the values of all rolls (Min 11 rolls to Max 21 rolls):");
         Scanner rollInput = new Scanner(System.in);
         String rollsEntered = rollInput.next();

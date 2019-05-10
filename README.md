@@ -37,4 +37,5 @@ Upon receiving a valid sequence of rolls [American Ten-Pin Bowling], this class 
 <LI>Do Maven Clean Install the project.</LI>
 <LI>Run the main class GameRunner.java</LI>
 <LI>Enter the rolls to calculate the BowlingGame Score.</LI>
+<LI>Open the file <B>"index.html"</B> in the path "/target/site/jacoco/com.kata.bowling/" in browser, to view the test coverage</LI>
 </UL>
